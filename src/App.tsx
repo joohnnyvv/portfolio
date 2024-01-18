@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useSpring, animated} from 'react-spring';
 import './App.css';
 import Header from './Components/Header/Header';
+import MainView from "./Components/MainView/MainView";
 
 function App() {
     const [pointerPosition, setPointerPosition] = useState({x: 0, y: 0});
@@ -37,6 +38,7 @@ function App() {
                 }}
             ></animated.div>
             <Header/>
+            <MainView pointerPosition={pointerPosition}/>
         </div>
     );
 }
