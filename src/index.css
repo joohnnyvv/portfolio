@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap');
+
+body {
+    background: #131313;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024", endColorstr="#09093b", GradientType=1);
+
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+
+
+    #blur {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: -1;
+        backdrop-filter: blur(80px);
+    }
+}
+
