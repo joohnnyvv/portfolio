@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import './MainView.css';
+import './MainPage.css';
 import img1 from '../../Assets/HomeImages/img-1.jpg';
 import img2 from '../../Assets/HomeImages/img-2.jpg';
 import img3 from '../../Assets/HomeImages/img-3.jpg';
@@ -10,6 +10,8 @@ import img7 from '../../Assets/HomeImages/img-7.jpg';
 import img8 from '../../Assets/HomeImages/img-8.jpg';
 import img9 from '../../Assets/HomeImages/img-9.jpg';
 import img10 from '../../Assets/HomeImages/img-10.jpg';
+import {Link} from "react-router-dom";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 interface MainViewProps {
     pointerPosition: { x: number; y: number };
@@ -17,19 +19,33 @@ interface MainViewProps {
 
 const imageList = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 
-const preloadImages = (images: string[]) => {
-    images.forEach((image) => {
-        const img = new Image();
-        img.src = image;
-    });
+const preloadImages = (images: string[]): Promise<void[]> => {
+    return Promise.all(images.map((image) => {
+        return new Promise<void>((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve();
+            img.onerror = reject;
+            img.src = image;
+        });
+    }));
 };
 
-export default function MainView({pointerPosition}: MainViewProps) {
+export default function MainPage({pointerPosition}: MainViewProps) {
     const imageShow = useRef<HTMLDivElement>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        preloadImages(imageList);
+        const loadImages = async () => {
+            try {
+                await preloadImages(imageList);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error loading images:', error);
+            }
+        };
+
+        loadImages();
 
         const handleMouseMove = () => {
             const {x, y} = pointerPosition;
@@ -61,16 +77,22 @@ export default function MainView({pointerPosition}: MainViewProps) {
 
     return (
         <div className='main-view'>
-            <div className='main-content-wrapper'>
-                <div className='img-show' ref={imageShow}
-                     style={{backgroundImage: `url(${imageList[currentImageIndex]})`}}></div>
-                <h1 className='welcome top'>designing</h1>
-                <h1 className='welcome middle'>tomorrow's</h1>
-                <button className='show-work-btn'>
-                    <h1>check my work</h1>
-                </button>
-                <h1 className='welcome bottom'>solutions</h1>
-            </div>
+            {isLoading ? (
+                <LoadingPage/>
+            ) : (
+                <div className='main-content-wrapper'>
+                    <div className='img-show' ref={imageShow}
+                         style={{backgroundImage: `url(${imageList[currentImageIndex]})`}}></div>
+                    <h1 className='welcome top'>designing</h1>
+                    <h1 className='welcome middle'>tomorrow's</h1>
+                    <Link to='my-work'>
+                        <button className='show-work-btn'>
+                            <h1>check my work</h1>
+                        </button>
+                    </Link>
+                    <h1 className='welcome bottom'>solutions</h1>
+                </div>
+            )}
         </div>
     );
 }

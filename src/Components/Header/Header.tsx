@@ -8,6 +8,7 @@ import smIcon from '../../Assets/social-media-icon.svg';
 import crossIcon from '../../Assets/cross-icon.png';
 import {useEffect, useRef, useState} from "react";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import {Link} from "react-router-dom";
 
 interface ImageProps {
     animate: (properties: { translate: string; scale: number }, options: {
@@ -51,16 +52,18 @@ export default function Header() {
         images.forEach((image, index) => shift(image, index, rangeX, rangeY));
 
     const shiftLogo = (e: MouseEvent): void => {
-        const rect = logoRef.current?.getBoundingClientRect();
-        const radius = 1000;
+        if (logoRef.current != null) {
+            const rect = logoRef.current.getBoundingClientRect();
+            const radius = 1000;
 
-        const centerX = rect?.left! + (rect?.width! / 2);
-        const centerY = rect?.top! + (rect?.height! / 2);
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
 
-        const rangeX = (e.clientX - centerX) / radius;
-        const rangeY = (e.clientY - centerY) / radius;
+            const rangeX = (e.clientX - centerX) / radius;
+            const rangeY = (e.clientY - centerY) / radius;
 
-        shiftAll(rangeX, rangeY);
+            shiftAll(rangeX, rangeY);
+        }
     };
 
     const resetLogo = (): void => {
@@ -114,15 +117,17 @@ export default function Header() {
 
     return (
         <div className='header'>
-            <div className='logo-wrapper slide-in-blurred-tl'>
-                <div id='logo' ref={logoRef}>
-                    <img src={logo4} alt='Logo' className='logo'/>
-                    <img src={logo3} alt='Logo' className='logo'/>
-                    <img src={logo2} alt='Logo' className='logo'/>
-                    <img src={logo1} alt='Logo' className='logo'/>
-                    <img src={logo} alt='Logo' className='logo'/>
+            <Link to='/'>
+                <div className='logo-wrapper slide-in-blurred-tl'>
+                    <div id='logo' ref={logoRef}>
+                        <img src={logo4} alt='Logo' className='logo'/>
+                        <img src={logo3} alt='Logo' className='logo'/>
+                        <img src={logo2} alt='Logo' className='logo'/>
+                        <img src={logo1} alt='Logo' className='logo'/>
+                        <img src={logo} alt='Logo' className='logo'/>
+                    </div>
                 </div>
-            </div>
+            </Link>
             <div className='contact-section slide-in-blurred-tr'>
                 {/*<div className='contact-me-button-container'>*/}
                 {/*    <a href="mailto:janekrembikowski@gmail.com" className='contact-me-btn'>*/}

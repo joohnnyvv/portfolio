@@ -2,7 +2,10 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useSpring, animated} from 'react-spring';
 import './App.css';
 import Header from './Components/Header/Header';
-import MainView from "./Components/MainView/MainView";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
+import MainPage from "./Components/MainPage/MainPage";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import MyWorkPage from "./Components/MyWorkPage/MyWorkPage";
 
 function App() {
     const [pointerPosition, setPointerPosition] = useState({x: 0, y: 0});
@@ -29,17 +32,30 @@ function App() {
     }, []);
 
     return (
-        <div className='App'>
-            <animated.div
-                id="blob"
-                ref={blobRef}
-                style={{
-                    ...animatedStyles,
-                }}
-            ></animated.div>
-            <Header/>
-            <MainView pointerPosition={pointerPosition}/>
-        </div>
+        <BrowserRouter>
+            <div className='App'>
+                <animated.div
+                    id="blob"
+                    ref={blobRef}
+                    style={{
+                        ...animatedStyles,
+                    }}
+                ></animated.div>
+                <Header/>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <MainPage pointerPosition={pointerPosition}/>
+                        }
+                    />
+                    <Route
+                        path="my-work"
+                        element={<MyWorkPage/>}
+                    />
+                </Routes>
+            </div>
+        </BrowserRouter>
     );
 }
 
