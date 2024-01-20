@@ -27,11 +27,11 @@
 
         .welcome {
             position: absolute;
-            color: #ea3eb4;
+            color: #eacb3e;
             transform: translate(-50%, -50%);
             text-align: center;
             font-size: 148px;
-            font-weight: 400;
+            font-weight: 800;
             text-shadow: #2c2c2c 5px 5px 5px;
             margin-bottom: 0;
         }
@@ -52,13 +52,15 @@
         }
 
         .show-work-btn {
-            background: #eacb3e;
+            background: #ea3eb4;
             color: #312623;
             border: none;
             padding: 12px;
             border-radius: 32px;
             position: absolute;
-            font-family: 'Patua One', serif;
+            /*font-family: 'Patua One', serif;*/
+            /*font-family: 'Grandstander', cursive;*/
+            font-family: 'Fredoka', sans-serif;
             top: 48%;
             left: 64%;
             display: flex;

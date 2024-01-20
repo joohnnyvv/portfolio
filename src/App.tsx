@@ -2,10 +2,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import {useSpring, animated} from 'react-spring';
 import './App.css';
 import Header from './Components/Header/Header';
-import {CSSTransition, TransitionGroup} from "react-transition-group";
 import MainPage from "./Components/MainPage/MainPage";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import MyWorkPage from "./Components/MyWorkPage/MyWorkPage";
+import {MyWorkPage} from "./Components/MyWorkPage/MyWorkPage";
 
 function App() {
     const [pointerPosition, setPointerPosition] = useState({x: 0, y: 0});

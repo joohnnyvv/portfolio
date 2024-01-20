@@ -8,6 +8,7 @@
     height: 90px;
     color: #3ec7ea;
     align-items: center;
+    user-select: none;
 
     .logo-wrapper {
         width: 50%;
@@ -17,6 +18,7 @@
         #logo {
             position: relative;
             top: -31px;
+            user-select: none;
 
             .logo {
                 position: absolute;

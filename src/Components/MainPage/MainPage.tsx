@@ -49,18 +49,21 @@ export default function MainPage({pointerPosition}: MainViewProps) {
 
         const handleMouseMove = () => {
             const {x, y} = pointerPosition;
-            const {left, top, width, height} = imageShow.current!.getBoundingClientRect();
+            if (imageShow.current != null) {
+                const {left, top, width, height} = imageShow.current!.getBoundingClientRect();
 
-            const centerX = left + width / 2;
-            const centerY = top + height / 2;
 
-            const deltaX = x - centerX;
-            const deltaY = centerY - y;
+                const centerX = left + width / 2;
+                const centerY = top + height / 2;
 
-            const rotateX = (deltaY / height) * 15;
-            const rotateY = (deltaX / width) * 15;
+                const deltaX = x - centerX;
+                const deltaY = centerY - y;
 
-            imageShow.current!.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                const rotateX = (deltaY / height) * 15;
+                const rotateY = (deltaX / width) * 15;
+
+                imageShow.current!.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }
         };
 
         const intervalId = setInterval(() => {

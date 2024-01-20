@@ -119,12 +119,12 @@ export default function Header() {
         <div className='header'>
             <Link to='/'>
                 <div className='logo-wrapper slide-in-blurred-tl'>
-                    <div id='logo' ref={logoRef}>
-                        <img src={logo4} alt='Logo' className='logo'/>
-                        <img src={logo3} alt='Logo' className='logo'/>
-                        <img src={logo2} alt='Logo' className='logo'/>
-                        <img src={logo1} alt='Logo' className='logo'/>
-                        <img src={logo} alt='Logo' className='logo'/>
+                    <div id='logo' ref={logoRef} draggable={false}>
+                        <img src={logo4} alt='Logo' className='logo' draggable={false}/>
+                        <img src={logo3} alt='Logo' className='logo' draggable={false}/>
+                        <img src={logo2} alt='Logo' className='logo' draggable={false}/>
+                        <img src={logo1} alt='Logo' className='logo' draggable={false}/>
+                        <img src={logo} alt='Logo' className='logo' draggable={false}/>
                     </div>
                 </div>
             </Link>
